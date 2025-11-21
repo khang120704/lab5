@@ -223,3 +223,117 @@
     </div>
 </body>
 </html>
+<!-- Search Box -->
+<div style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; background:#f7f7f7;">
+    <form action="student" method="get" style="display: flex; gap: 10px; align-items: center;">
+        <input type="hidden" name="action" value="search">
+
+        <!-- Keyword input -->
+        <input type="text"
+               name="keyword"
+               placeholder="Search by code, name, or email..."
+               value="${keyword}"
+               style="flex:1; padding: 6px;">
+
+        <!-- Search button -->
+        <button type="submit" style="padding: 6px 12px;">🔍 Search</button>
+
+        <!-- Show Only When Searching -->
+        <c:if test="${not empty keyword}">
+            <a href="student?action=list"
+               style="padding: 6px 12px; background:#ddd; border:1px solid #bbb; text-decoration:none;">
+                Clear
+            </a>
+        </c:if>
+    </form>
+</div>
+
+<!-- Search result message -->
+<c:if test="${not empty keyword}">
+    <div style="margin-bottom: 15px; font-style: italic;">
+        Search results for: <strong>${keyword}</strong>
+    </div>
+</c:if>
+<!-- Filter by Major -->
+<form action="student" method="get" style="margin-bottom: 20px;">
+    <input type="hidden" name="action" value="filter">
+
+    <label>Filter by Major:</label>
+    <select name="major">
+        <option value="">-- All Majors --</option>
+
+        <option value="Information Technology" 
+            ${selectedMajor == 'Information Technology' ? 'selected' : ''}>
+            Information Technology
+        </option>
+
+        <option value="Computer Science" 
+            ${selectedMajor == 'Computer Science' ? 'selected' : ''}>
+            Computer Science
+        </option>
+
+        <option value="Artificial Intelligence" 
+            ${selectedMajor == 'Artificial Intelligence' ? 'selected' : ''}>
+            Artificial Intelligence
+        </option>
+
+        <option value="Biomedical Engineering" 
+            ${selectedMajor == 'Biomedical Engineering' ? 'selected' : ''}>
+            Biomedical Engineering
+        </option>
+
+        <option value="Software Engineering" 
+            ${selectedMajor == 'Software Engineering' ? 'selected' : ''}>
+            Software Engineering
+        </option>
+
+    </select>
+
+    <button type="submit">Apply</button>
+
+    <c:if test="${not empty selectedMajor}">
+        <a href="student?action=list">Clear Filter</a>
+    </c:if>
+</form>
+<thead>
+<tr>
+    <th>
+        <a href="student?action=sort&sortBy=id&order=${order == 'asc' ? 'desc' : 'asc'}">
+            ID
+        </a>
+    </th>
+
+    <th>
+        <a href="student?action=sort&sortBy=student_code&order=${order == 'asc' ? 'desc' : 'asc'}">
+            Student Code
+        </a>
+    </th>
+
+    <th>
+        <a href="student?action=sort&sortBy=full_name&order=${order == 'asc' ? 'desc' : 'asc'}">
+            Full Name
+        </a>
+    </th>
+
+    <th>
+        <a href="student?action=sort&sortBy=email&order=${order == 'asc' ? 'desc' : 'asc'}">
+            Email
+        </a>
+    </th>
+
+    <th>
+        <a href="student?action=sort&sortBy=major&order=${order == 'asc' ? 'desc' : 'asc'}">
+            Major
+        </a>
+    </th>
+
+    <th>Actions</th>
+</tr>
+</thead>
+<c:if test="${not empty sortBy}">
+    <p>Sorting by: <b>${sortBy}</b> (${order})</p>
+</c:if>
+
+<c:if test="${not empty selectedMajor}">
+    <p>Filtered by major: <b>${selectedMajor}</b></p>
+</c:if>

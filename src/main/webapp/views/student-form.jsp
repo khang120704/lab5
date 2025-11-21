@@ -232,3 +232,35 @@
     </div>
 </body>
 </html>
+<style>
+    .error {
+        color: red;
+        font-size: 14px;
+        display: block;
+        margin-top: 5px;
+    }
+</style>
+<div class="form-group">
+    <label for="studentCode">Student Code:</label>
+    <input type="text" id="studentCode" name="studentCode"
+           value="${student.studentCode}">
+    <c:if test="${not empty errorCode}">
+        <span class="error">${errorCode}</span>
+    </c:if>
+</div>
+<div class="form-group">
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" name="fullName"
+           value="${student.fullName}">
+    <c:if test="${not empty errorName}">
+        <span class="error">${errorName}</span>
+    </c:if>
+</div>
+<div class="form-group">
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email"
+           value="${student.email}">
+    <c:if test="${not empty errorEmail}">
+        <span class="error">${errorEmail}</span>
+    </c:if>
+</div>
